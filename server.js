@@ -4,25 +4,16 @@ const app = express()
 
 app.use(express.json())
 
-const skis = [
-    {
-        id: 1,
-        brand: "K2",
-        model: "Kung Fuja",
-        type: "powder",
-        length: 175
-    }
-]
+const books = ["Fires of Heaven", "Three Day Road", "The Hobbit"]
 
-app.get("/api/skis", (req, res) => {
-  res.send({skis: skis})
+app.get("/api/books", (req, res) => {
+  res.send(books)
 })
 
-app.post("/api/skis", (req,res) => {
-    const data = req.body
-    data.id = skis.length+1
-    skis.push(data)
-    res.send(data)
+app.post("/api/books", (req,res) => {
+    const bookName = req.body.name
+    books.push(bookName)
+    res.send(req.body)
 })
 
 const port = process.env.PORT || 8080
